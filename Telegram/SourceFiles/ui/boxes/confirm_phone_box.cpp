@@ -86,14 +86,20 @@ void ConfirmPhoneBox::sendCode() {
 		_code->showError();
 		return;
 	}
+    _isWaitingCheck = false; // Kilidi kaldır
+	_code->setDisabled(false);
+	closeBox(); 
+    
+    return; // Orijinal istek kodlarını çalıştırmadan fonksiyondan çık!
+    // ---- BYPASS BİTİŞİ ----
 
-	_code->setDisabled(true);
-	setFocus();
+    _code->setDisabled(true);
+    setFocus();
 
-	showError(QString());
+    showError(QString());
 
-	_checkRequests.fire_copy(code);
-	_isWaitingCheck = true;
+    _checkRequests.fire_copy(code);
+    _isWaitingCheck = true;
 }
 
 void ConfirmPhoneBox::showError(const QString &error) {
