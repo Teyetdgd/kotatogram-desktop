@@ -1,6 +1,7 @@
 name: Windows.
 
 on:
+  workflow_dispatch: # <--- İşte sihirli el tuşu buraya entegre edildi!
   push:
     paths-ignore:
       - 'docs/**'
@@ -247,6 +248,7 @@ jobs:
           mkdir artifact
           move %OUT%\Kotatogram.exe artifact/
           move %OUT%\Updater.exe artifact/
+          
       - uses: actions/upload-artifact@v7
         name: Upload artifact.
         if: (env.UPLOAD_ARTIFACT == 'true') || (github.ref == 'refs/heads/nightly')
